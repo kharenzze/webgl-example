@@ -9,8 +9,17 @@ const gl = canvas.getContext("experimental-webgl");
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
+//compile shader
+const vertShader = gl.createShader(gl.VERTEX_SHADER);
+gl.shaderSource(vertShader, vert);
+gl.compileShader(vertShader);
 
-gl.viewport(0, 0, canvas.width, canvas.height);
-gl.clearColor(0, 0.5, 0, 1);
-gl.clear(gl.COLOR_BUFFER_BIT);
+const fragShader = gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(fragShader, frag);
+gl.compileShader(fragShader);
+
+const program = gl.createProgram();
+gl.attachShader(program, vertShader);
+gl.attachShader(program, fragShader);
+gl.linkProgram(program);
 
