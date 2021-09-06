@@ -1,10 +1,17 @@
 {
   "name": "webgl",
   "version": "1.0.0",
-  "main": "dist/main.js",
+  "app": "dist/main.js",
   "source": "src/index.ts",
   "author": "kharenzze",
   "license": "MIT",
+  "browserslist": "> 0.25%",
+  "engines": {
+    "browsers": "> 0.25%"
+  },
+  "targets": {
+    "app": {}
+  },
   "scripts": {
     "watch": "parcel watch",
     "build": "parcel build"

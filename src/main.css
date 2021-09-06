@@ -1,0 +1,4 @@
+canvas#canvas {
+  position: absolute;
+  inset: 0 0 0 0;
+}
