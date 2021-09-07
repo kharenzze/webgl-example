@@ -4,22 +4,46 @@ import './main.css'
 import vert from './sample.vert'
 import frag from './sample.frag'
 
-interface Canvas extends HTMLElement {
+interface SimpleRect {
   height: number
   width: number
 }
 
+const fits = (ref: SimpleRect, other: SimpleRect): boolean =>
+  other.width <= ref.width && other.height <= ref.height
+
+const getViewSimpleRect = ():SimpleRect => ({
+  height: window.innerHeight,
+  width: window.innerWidth,
+})
+
+interface Canvas extends HTMLElement, SimpleRect {}
+
+const aspect = 16 / 9
 const canvas: Canvas = document.getElementById('canvas') as Canvas
 const rect = canvas.getBoundingClientRect() 
 const gl = canvas.getContext("webgl");
 
 const onResize = (evt) => {
-  const rect = canvas.getBoundingClientRect()
-  canvas.height = rect.height
-  canvas.width = rect.width
+  const v = getViewSimpleRect()
+  const opt1: SimpleRect = {
+    height: v.height,
+    width: v.height * aspect
+  }
+  const opt2: SimpleRect = {
+    height: v.width / aspect,
+    width: v.width
+  }
+  const desired = fits(v, opt1) ? opt1 : opt2
+  canvas.height = desired.height
+  canvas.width = desired.width
+  console.log(desired);
+  
 }
 
 onResize()
+
+const resizeListener = window.addEventListener('resize', onResize)
 
 //compile shader
 const vertShader = gl.createShader(gl.VERTEX_SHADER);
@@ -36,8 +60,6 @@ gl.attachShader(program, fragShader);
 gl.linkProgram(program);
 
 //vertices
-const aspect = rect.width / rect.height;
-
 const vertices = new Float32Array([
 -0.5, 0.5*aspect, 0.5, 0.5*aspect, 0.5,-0.5*aspect, // Triangle 1
 -0.5, 0.5*aspect, 0.5,-0.5*aspect, -0.5,-0.5*aspect // Triangle 2
