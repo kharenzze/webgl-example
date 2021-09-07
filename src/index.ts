@@ -44,6 +44,7 @@ const onResize = (evt) => {
   const desired = fits(v, opt1) ? opt1 : opt2
   canvas.height = desired.height
   canvas.width = desired.width
+  gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 }
 
 onResize()
@@ -61,7 +62,7 @@ gl.linkProgram(program);
 
 //vertices
 const vertices = new Float32Array([
--0.5, 0.5*aspect, 0.5, 0.5*aspect, 0.5,-0.5*aspect, // Triangle 1
+-1, 0.5*aspect, 1, 0.5*aspect, 0.5,-0.5*aspect, // Triangle 1
 -0.5, 0.5*aspect, 0.5,-0.5*aspect, -0.5,-0.5*aspect // Triangle 2
 ]);
 
