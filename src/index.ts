@@ -37,8 +37,6 @@ const onResize = (evt) => {
   const desired = fits(v, opt1) ? opt1 : opt2
   canvas.height = desired.height
   canvas.width = desired.width
-  console.log(desired);
-  
 }
 
 onResize()
