@@ -70,7 +70,7 @@ const vbuffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, vbuffer);
 gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
 
-const itemSize = 2;
+const itemSize =vertices.length / 6; 
 const numItems = vertices.length / itemSize;
 
 gl.useProgram(program);
