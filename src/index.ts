@@ -4,12 +4,22 @@ import './main.css'
 import vert from './sample.vert'
 import frag from './sample.frag'
 
-const canvas = document.getElementById('canvas')
-const rect = canvas.getBoundingClientRect()
+interface Canvas extends HTMLElement {
+  height: number
+  width: number
+}
+
+const canvas: Canvas = document.getElementById('canvas') as Canvas
+const rect = canvas.getBoundingClientRect() 
 const gl = canvas.getContext("webgl");
 
-canvas.height = rect.height
-canvas.width = rect.width
+const onResize = (evt) => {
+  const rect = canvas.getBoundingClientRect()
+  canvas.height = rect.height
+  canvas.width = rect.width
+}
+
+onResize()
 
 //compile shader
 const vertShader = gl.createShader(gl.VERTEX_SHADER);
