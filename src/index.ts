@@ -24,6 +24,13 @@ const canvas: Canvas = document.getElementById('canvas') as Canvas
 const rect = canvas.getBoundingClientRect() 
 const gl = canvas.getContext("webgl");
 
+const createShader = (type, sourceCode: string) => {
+  const shader = gl.createShader(type);
+  gl.shaderSource(shader, sourceCode);
+  gl.compileShader(shader);
+  return shader
+}
+
 const onResize = (evt) => {
   const v = getViewSimpleRect()
   const opt1: SimpleRect = {
@@ -44,13 +51,8 @@ onResize()
 const resizeListener = window.addEventListener('resize', onResize)
 
 //compile shader
-const vertShader = gl.createShader(gl.VERTEX_SHADER);
-gl.shaderSource(vertShader, vert);
-gl.compileShader(vertShader);
-
-const fragShader = gl.createShader(gl.FRAGMENT_SHADER);
-gl.shaderSource(fragShader, frag);
-gl.compileShader(fragShader);
+const vertShader = createShader(gl.VERTEX_SHADER, vert)
+const fragShader = createShader(gl.FRAGMENT_SHADER, frag)
 
 const program = gl.createProgram();
 gl.attachShader(program, vertShader);
