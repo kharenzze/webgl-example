@@ -6,7 +6,7 @@ import frag from './sample.frag'
 
 const canvas = document.getElementById('canvas')
 const rect = canvas.getBoundingClientRect()
-const gl = canvas.getContext("experimental-webgl");
+const gl = canvas.getContext("webgl");
 
 canvas.height = rect.height
 canvas.width = rect.width
